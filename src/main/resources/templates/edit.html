@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактировать данные</title>
+</head>
+<body>
+<form th:method="patch" th:action="@{/admin/edit/{i}(i=${user.id})}" th:object="${user}">
+  <label for="nm">Имя:</label>
+  <input id="nm" type="text" th:field="*{username}" th:value="${user.username}">
+  <br>
+  <label for="lstnm">Фамилия:</label>
+  <input id="lstnm" type="text" th:field="*{secondName}" th:value="${user.secondName}">
+  <br>
+  <label for="eml">Email:</label>
+  <input id="eml" type="text" th:field="*{email}" th:value="${user.email}">
+  <br>
+  <input type="hidden" th:field="*{id}" th:value="${user.id}">
+  <input type="hidden" th:field="*{password}" th:value="${user.password}">
+  <p>
+    <label>Roles:
+
+
+      <input type="checkbox" name="roleList"
+             th:each="role : ${roleList}"
+             th:text="${role.getRoles()}"
+             th:value="${role.getRoles()}"
+             th:field="*{roles}"
+      />
+
+    </label>
+  </p>
+  <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>
