@@ -52,13 +52,15 @@ public class AdminController {
     }
 
     @GetMapping("/user/{id}")
-    public String readUser(Model model, @PathVariable(name = "id") long id) {
-        model.addAttribute("user", userService.getById(id));
-        return "show";
+    public String readUser(Model model, User admin) {
+        model.addAttribute("admin", admin);
+        model.addAttribute("users", userService.getAllUser());
+        model.addAttribute("userRoles", roleService.getAllRoles());
+        return "admin";
     }
 
     @GetMapping("user/{id}/edit")
-    public String editUser(Model model, @PathVariable() long id) {
+    public String editUser(Model model, @PathVariable("id") long id) {
         model.addAttribute("user", userService.getById(id));
         model.addAttribute("roleList", userService.getAllUser());
         return "edit";
