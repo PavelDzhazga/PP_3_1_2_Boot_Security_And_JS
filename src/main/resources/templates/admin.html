@@ -23,7 +23,7 @@
 <div class="container-fluid">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <h3 class="navbar-brand col-md-3 col-lg-2 mr-0 px-3"><span th:text="${admin.getUsername()}">VALUE</span>
-            with roles: <span th:text="${admin.getRoles()}"></span></h3>
+            with roles: <span th:text="${admin.roleToString()}"></span></h3>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -320,10 +320,10 @@
 
                                             <div class="form-group">
                                                 <label for="rolesUser" class="font-weight-bold">Role</label>
-                                                <select multiple class="custom-select" size="2" id="rolesUser" name="roleList">
-                                                    <option th:each="role : ${rolesNew}" th:value="${role.getId()}">
-                                                        <th:block th:text="${role.getRole()}"></th:block>
-                                                    </option>
+                                                <select multiple class="form-select col-md-5" size="2" id="rolesUser"
+                                                        th:value="${userNew.roles}" name="roles">
+                                                    <option value="ROLE_ADMIN">ADMIN</option>
+                                                    <option value="ROLE_ADMIN">USER</option>
                                                 </select>
                                             </div>
                                             <button type="submit" class="btn btn-success">Add new user</button>

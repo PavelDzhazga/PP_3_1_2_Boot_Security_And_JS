@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
@@ -60,12 +62,13 @@ public class AdminController {
 
 
     @GetMapping()
-    public String show(Model model, User admin) {
+    public String show(Model model, @AuthenticationPrincipal User admin) {
         model.addAttribute("admin", admin);
         model.addAttribute("users", userService.getAllUser());
         model.addAttribute("userRoles", roleService.getAllRoles());
-
         model.addAttribute("userNew", new User());
+        List<Role> roles = roleService.getAllRoles();
+        model.addAttribute("rolesNew", roles);
         model.addAttribute("rolesNew", roleService.getAllRoles());
         return "admin";
     }
