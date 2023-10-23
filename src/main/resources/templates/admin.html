@@ -110,7 +110,8 @@
                                                     <div class="modal-content">
                                                         <form id="formEdit" th:method="PATCH"
                                                               action="#"
-                                                              th:action="@{/admin/{id}(id=${user.id})}" th:object="${user}">
+                                                              th:object="${user}"
+                                                              th:action="@{/admin/{id}(id=${user.id})}">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title">Edit user</h5>
                                                                 <button type="button" class="btn-close"
@@ -131,8 +132,8 @@
                                                                             <label for="editName">
                                                                                 <strong>First name</strong>
                                                                                 <input class="form-control" th:type="text"
-                                                                                       th:name="firstName" id="editName"
-                                                                                       th:value="${user.username}" required
+                                                                                       th:name="name" id="editName"
+                                                                                       th:value="${user.name}" required
                                                                                        minlength="1"
                                                                                        maxlength="50">
                                                                             </label>
@@ -141,7 +142,7 @@
                                                                             <label for="editLastname">
                                                                                 <strong>Lastname</strong>
                                                                                 <input class="form-control" th:type="text"
-                                                                                       th:name="lastName" id="editLastname"
+                                                                                       th:name="secondName" id="editLastname"
                                                                                        th:value="${user.secondName}" required
                                                                                        minlength="1"
                                                                                        maxlength="50">
@@ -165,14 +166,15 @@
                                                                                        maxlength="20">
                                                                             </label>
                                                                         <p/>
+                                                                        </label>
+                                                                        <p/>
                                                                         <label class="container-fluid col-6"
                                                                                for="editUserRoles">
                                                                             <strong>Role</strong>
-                                                                            <select id="editUserRoles" class="form-select"
-                                                                                    name="roleList" multiple size="2">
-                                                                                <option th:each="role: ${rolesNew}"
-                                                                                        th:value="${role.getId()}">
-                                                                                    <th:block th:text="${role.getRole()}">
+
+                                                                            <select id="editUserRoles" class="form-select" name="roleId" multiple size="2">
+                                                                                <option th:each="role: ${rolesNew}" th:value="${role.id}">
+                                                                                    <th:block th:text="${role.role}">
                                                                                     </th:block>
                                                                                 </option>
                                                                             </select>
@@ -320,10 +322,10 @@
 
                                             <div class="form-group">
                                                 <label for="rolesUser" class="font-weight-bold">Role</label>
-                                                <select multiple class="form-select col-md-5" size="2" id="rolesUser"
-                                                        th:value="${userNew.roles}" name="roles">
-                                                    <option value="ROLE_ADMIN">ADMIN</option>
-                                                    <option value="ROLE_ADMIN">USER</option>
+                                                <select multiple class="form-select col-md-5" size="2" id="rolesUser" name="roleIds">
+                                                    <option th:each="role : ${rolesNew}" th:value="${role.id}">
+                                                        <th:block th:text="${role.role}"></th:block>
+                                                    </option>
                                                 </select>
                                             </div>
                                             <button type="submit" class="btn btn-success">Add new user</button>

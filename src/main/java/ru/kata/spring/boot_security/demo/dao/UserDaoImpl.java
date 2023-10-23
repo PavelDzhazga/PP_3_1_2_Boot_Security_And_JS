@@ -53,14 +53,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(Long id, User user) {
-        entityManager.joinTransaction();;
-        User us = getById(id);
-        us.setName(user.getName());
-        us.setSecondName(user.getSecondName());
-        us.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        us.setEmail(user.getEmail());
-        entityManager.merge(us);
+    public void updateUser(User user) {
+        entityManager.merge(user);
+
     }
 
     @Override

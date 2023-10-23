@@ -8,7 +8,9 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -39,6 +41,15 @@ public class CommandInitClass implements CommandLineRunner {
         Set<Role> setAdmin = new HashSet<>();
         Set<Role> setUser = new HashSet<>();
 
+        List<Long> adminROLE = new ArrayList<>();
+        adminROLE.add(1L);
+        adminROLE.add(2L);
+
+        List<Long> userROLE = new ArrayList<>();
+        userROLE.add(2L);
+
+
+
         setAdmin.add(roleAdmin);
         setAdmin.add(roleUser);
         setUser.add(roleUser);
@@ -47,8 +58,9 @@ public class CommandInitClass implements CommandLineRunner {
                 passwordEncoder.encode("password"),setAdmin);
         User user = new User("Ivan", "Ivanov", "ivanov@mail.ru",
                 passwordEncoder.encode("password"),setUser);
-        userService.addUser(admin);
-        userService.addUser(user);
+
+        userService.addUser(admin, adminROLE);
+        userService.addUser(user, userROLE);
 
 
 
