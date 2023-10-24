@@ -41,14 +41,6 @@ public class CommandInitClass implements CommandLineRunner {
         Set<Role> setAdmin = new HashSet<>();
         Set<Role> setUser = new HashSet<>();
 
-        List<Long> adminROLE = new ArrayList<>();
-        adminROLE.add(1L);
-        adminROLE.add(2L);
-
-        List<Long> userROLE = new ArrayList<>();
-        userROLE.add(2L);
-
-
 
         setAdmin.add(roleAdmin);
         setAdmin.add(roleUser);
@@ -59,8 +51,8 @@ public class CommandInitClass implements CommandLineRunner {
         User user = new User("Ivan", "Ivanov", "ivanov@mail.ru",
                 passwordEncoder.encode("password"),setUser);
 
-        userService.addUser(admin, adminROLE);
-        userService.addUser(user, userROLE);
+        userService.addUser(admin);
+        userService.addUser(user);
 
 
 

@@ -30,11 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public void addUser(User user, List<Long> roleId) {
-        Set<Role> setRole = roleId.stream()
-                        .map(roleDao::getRoleById)
-                .collect(Collectors.toSet());
-        user.setRoles(setRole);
+    public void addUser(User user) {
         userDao.addUser(user);
     }
 
@@ -50,7 +46,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public void updateUser(Long id, User user, List<Long> roleId) {
+    public void updateUser(Long id, User user) {
         User us = userDao.getById(id);
         if (user.getPassword() != null) {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
@@ -59,10 +55,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         us.setSecondName(user.getSecondName());
         us.setEmail(user.getEmail());
 
-        Set<Role> setRole = roleId.stream()
-                .map(roleDao::getRoleById)
-                .collect(Collectors.toSet());
-        user.setRoles(setRole);
+
 
         userDao.updateUser(user);
     }

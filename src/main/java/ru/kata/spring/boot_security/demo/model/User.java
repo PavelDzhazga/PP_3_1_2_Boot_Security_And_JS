@@ -41,18 +41,11 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany
     @Fetch(FetchMode.JOIN)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(Set<Role> roles) {
-        roles.add(new Role(1L, "ROLE_ADMIN"));
-        roles.add(new Role(2L, "ROLE_USER"));
-        this.roles = roles;
-    }
+
 
     public User() {
     }
