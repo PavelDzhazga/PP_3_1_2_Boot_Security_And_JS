@@ -10,8 +10,9 @@ function getAllUsers() {
 }
 
 function getAdminPage() {
-    fetch(url).then(response => response.json()).then(user =>
-        loadTable(user))
+    fetch(url)
+        .then(response => response.json())
+        .then(user => loadTable(user))
 }
 
 function loadTable(listAllUsers) {
